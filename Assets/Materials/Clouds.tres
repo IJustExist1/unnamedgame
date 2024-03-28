@@ -1,0 +1,48 @@
+[gd_resource type="StandardMaterial3D" load_steps=6 format=3 uid="uid://cc28cvtwv802l"]
+
+[sub_resource type="Gradient" id="Gradient_xk7h6"]
+interpolation_mode = 2
+colors = PackedColorArray(0.0509804, 0.0509804, 0.0509804, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5d74o"]
+noise_type = 3
+offset = Vector3(0, 7.45066, 0)
+fractal_type = 3
+fractal_lacunarity = 1.96
+fractal_gain = 0.65
+fractal_ping_pong_strength = 2.305
+domain_warp_enabled = true
+domain_warp_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eg3wx"]
+seamless = true
+seamless_blend_skirt = 1.0
+color_ramp = SubResource("Gradient_xk7h6")
+noise = SubResource("FastNoiseLite_5d74o")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_udwvq"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d64sj"]
+noise = SubResource("FastNoiseLite_udwvq")
+
+[resource]
+transparency = 2
+alpha_scissor_threshold = 0.3
+alpha_antialiasing_mode = 0
+blend_mode = 2
+cull_mode = 2
+depth_draw_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("NoiseTexture2D_eg3wx")
+heightmap_scale = 16.0
+refraction_enabled = true
+refraction_scale = 1.0
+refraction_texture_channel = 3
+detail_mask = SubResource("NoiseTexture2D_d64sj")
+texture_filter = 5
+disable_receive_shadows = true
+grow = true
+grow_amount = -12.0
+proximity_fade_distance = 94.1
+distance_fade_mode = 1
+distance_fade_min_distance = 400.0

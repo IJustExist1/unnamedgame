@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3f8b3qbap1aw"]
+
+[ext_resource type="PackedScene" uid="uid://bixdd7pa4ro3h" path="res://Assets/Objects/robot_boss_arm.tscn" id="1_lvvbw"]
+[ext_resource type="Script" path="res://Assets/Scripts/robot_boss.gd" id="1_te1ro"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bg7ks"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_76w1y"]
+
+[node name="RobotBoss" type="CharacterBody3D"]
+script = ExtResource("1_te1ro")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_bg7ks")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_76w1y")
+
+[node name="arm" parent="." instance=ExtResource("1_lvvbw")]
+transform = Transform3D(-0.05, 0, -4.37114e-09, 0, 0.05, 0, 4.37114e-09, 0, -0.05, -0.5, 0.3, 0)
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

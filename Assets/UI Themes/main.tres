@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://b1xsi86nkonef"]
+
+[ext_resource type="FontFile" uid="uid://dpm7n0gcth4fv" path="res://Assets/Fonts/VCR_MONO.ttf" id="1_lpu1y"]
+
+[resource]
+/fonts/vcr = ExtResource("1_lpu1y")

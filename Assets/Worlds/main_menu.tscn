@@ -1,0 +1,77 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbkqro7vbxgn8"]
+
+[ext_resource type="Theme" uid="uid://b1xsi86nkonef" path="res://Assets/UI Themes/main.tres" id="1_eeotw"]
+[ext_resource type="Script" path="res://Assets/Scripts/main_menu.gd" id="1_mvg0u"]
+[ext_resource type="FontFile" uid="uid://dpm7n0gcth4fv" path="res://Assets/Fonts/VCR_MONO.ttf" id="1_xk3qf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v31s4"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_eeotw")
+script = ExtResource("1_mvg0u")
+
+[node name="MainMenu" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_v31s4")
+
+[node name="MarginContainer" type="MarginContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0.745098, 0.243137, 0.219608, 1)
+theme_override_constants/shadow_offset_x = 15
+theme_override_fonts/font = ExtResource("1_xk3qf")
+theme_override_font_sizes/font_size = 200
+text = "UNNAMED GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Play" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xk3qf")
+theme_override_font_sizes/font_size = 75
+text = "PLAY
+"
+
+[node name="Multiplayer" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xk3qf")
+theme_override_font_sizes/font_size = 75
+text = "MULTIPLAYER"
+
+[node name="Quit" type="Button" parent="MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_xk3qf")
+theme_override_font_sizes/font_size = 75
+text = "QUIT"
+
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/Play" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="MainMenu/MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

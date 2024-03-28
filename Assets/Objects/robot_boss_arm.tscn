@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://bixdd7pa4ro3h"]
+
+[ext_resource type="PackedScene" uid="uid://celojovxskh0g" path="res://Assets/Meshes/arm.glb" id="1_dvnvy"]
+[ext_resource type="Script" path="res://Assets/Scripts/robot_boss_arm.gd" id="2_rkyva"]
+
+[node name="arm" instance=ExtResource("1_dvnvy")]
+script = ExtResource("2_rkyva")
+
+[node name="Cube" parent="Arm/Skeleton3D" index="0"]
+layers = 3
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "CubeAction"

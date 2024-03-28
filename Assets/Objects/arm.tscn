@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbp1lvkk4jotv"]
+
+[ext_resource type="PackedScene" uid="uid://celojovxskh0g" path="res://Assets/Meshes/arm.glb" id="1_nfv62"]
+[ext_resource type="Script" path="res://Assets/Scripts/arm.gd" id="2_2s8c8"]
+
+[node name="arm" instance=ExtResource("1_nfv62")]
+script = ExtResource("2_2s8c8")
+
+[node name="Skeleton3D" parent="Arm" index="0"]
+bones/0/rotation = Quaternion(0.0707032, -0.019007, 0.678253, 0.731173)
+bones/1/rotation = Quaternion(-8.30925e-06, -4.14866e-08, 0.588592, 0.80843)
+bones/2/rotation = Quaternion(0.0106724, 0.0724322, -0.523108, 0.849116)
+
+[node name="Cube" parent="Arm/Skeleton3D" index="0"]
+layers = 3
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "CubeAction"

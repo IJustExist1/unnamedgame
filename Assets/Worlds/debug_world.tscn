@@ -1,0 +1,178 @@
+[gd_scene load_steps=13 format=3 uid="uid://dwtwhn2q2arhk"]
+
+[ext_resource type="Environment" uid="uid://b2sdyvtl7fs6w" path="res://Assets/Enviroment/enviroment.tres" id="1_12lvt"]
+[ext_resource type="Script" path="res://Assets/Scripts/World.gd" id="1_404jf"]
+[ext_resource type="Material" uid="uid://5p12kx7g2ayq" path="res://Assets/Materials/FacilityFloor.tres" id="1_rtt3u"]
+[ext_resource type="FontFile" uid="uid://dpm7n0gcth4fv" path="res://Assets/Fonts/VCR_MONO.ttf" id="2_gl0e6"]
+[ext_resource type="CameraAttributesPractical" uid="uid://driiblu7ww3ce" path="res://Assets/Enviroment/cam.tres" id="3_xawub"]
+[ext_resource type="Texture2D" uid="uid://thgisgjwmnti" path="res://Assets/Textures/Crates/Sprite-0001_d.png" id="7_5yu7j"]
+[ext_resource type="Texture2D" uid="uid://dep33odw5xg1x" path="res://Assets/Textures/Crates/Sprite-0001_s.png" id="8_lfp38"]
+[ext_resource type="Texture2D" uid="uid://cpgwjlc16pwkk" path="res://Assets/Textures/Crates/Sprite-0001_n.png" id="9_vfcrb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jfk8f"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ln1gt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ha71"]
+albedo_texture = ExtResource("7_5yu7j")
+normal_texture = ExtResource("9_vfcrb")
+anisotropy_enabled = true
+anisotropy_flowmap = ExtResource("8_lfp38")
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_xfa3h"]
+material = SubResource("StandardMaterial3D_7ha71")
+
+[node name="DebugWorld" type="Node" node_paths=PackedStringArray("worldenv") groups=["World"]]
+script = ExtResource("1_404jf")
+worldenv = NodePath("WorldEnvironment")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Assets/Entities/player.tscn")
+spawn_path = NodePath("../Multiplayer")
+
+[node name="Multiplayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="Multiplayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_jfk8f")
+
+[node name="MainMenu" type="PanelContainer" parent="Multiplayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 810.0
+offset_top = 364.0
+offset_right = -810.0
+offset_bottom = -364.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Multiplayer/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Multiplayer/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Panel" type="Panel" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Title" type="Label" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_gl0e6")
+theme_override_font_sizes/font_size = 40
+text = "MULTIPLAYER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Host" type="Button" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_gl0e6")
+text = "HOST"
+
+[node name="useUpnP" type="CheckButton" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_gl0e6")
+text = "Use UPnP"
+
+[node name="Join" type="Button" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gl0e6")
+text = "JOIN"
+
+[node name="Address" type="LineEdit" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gl0e6")
+placeholder_text = "ENTER ADDRESS TO JOIN"
+
+[node name="Back" type="Button" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_gl0e6")
+text = "BACK"
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.447467, 0.223099, 0, 0.446198, 0.894934, -0.5, 0.775036, -0.386419, 0, 0, 0)
+visible = false
+light_energy = 5.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_12lvt")
+camera_attributes = ExtResource("3_xawub")
+
+[node name="Map" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+use_collision = true
+collision_layer = 16
+size = Vector3(50, 1, 50)
+material = ExtResource("1_rtt3u")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Map"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3, 1, 1)
+collision_layer = 4
+collision_mask = 31
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/StaticBody3D"]
+shape = SubResource("BoxShape3D_ln1gt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/StaticBody3D"]
+mesh = SubResource("BoxMesh_xfa3h")
+skeleton = NodePath("../../..")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Map"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 4, 1, 0)
+collision_layer = 4
+collision_mask = 31
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/StaticBody3D2"]
+shape = SubResource("BoxShape3D_ln1gt")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/StaticBody3D2"]
+mesh = SubResource("BoxMesh_xfa3h")
+skeleton = NodePath("../../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 2, 0)
+light_energy = 5.0
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3, 2, 0)
+light_energy = 5.0
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3, 2, -7)
+light_energy = 5.0
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -3, 2, -7)
+light_energy = 5.0
+
+[connection signal="pressed" from="Multiplayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="toggled" from="Multiplayer/MainMenu/MarginContainer/VBoxContainer/HBoxContainer/useUpnP" to="." method="_on_use_upn_p_toggled"]
+[connection signal="pressed" from="Multiplayer/MainMenu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]
+[connection signal="pressed" from="Multiplayer/MainMenu/MarginContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]

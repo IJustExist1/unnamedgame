@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://dypks237jc615"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/World.gd" id="1_1fbph"]
+[ext_resource type="Environment" uid="uid://b2sdyvtl7fs6w" path="res://Assets/Enviroment/enviroment.tres" id="1_oplyl"]
+[ext_resource type="CameraAttributesPractical" uid="uid://driiblu7ww3ce" path="res://Assets/Enviroment/cam.tres" id="2_mhnte"]
+[ext_resource type="Material" uid="uid://5p12kx7g2ayq" path="res://Assets/Materials/FacilityFloor.tres" id="3_8la8x"]
+[ext_resource type="PackedScene" uid="uid://d4h5kh725iqcf" path="res://Assets/Objects/core_object.tscn" id="4_yhvs2"]
+[ext_resource type="PackedScene" uid="uid://cor1naj8xt1iu" path="res://Assets/Objects/explosion_connecter.tscn" id="5_1rn25"]
+[ext_resource type="PackedScene" uid="uid://clqhkc31k8smd" path="res://Assets/Entities/player.tscn" id="6_hhffc"]
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_1fbph")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.447467, 0.223099, 0, 0.446198, 0.894934, -0.5, 0.775036, -0.386419, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_oplyl")
+camera_attributes = ExtResource("2_mhnte")
+
+[node name="Floor" type="CSGBox3D" parent="."]
+use_collision = true
+size = Vector3(50, 1, 50)
+material = ExtResource("3_8la8x")
+
+[node name="CoreHolder" parent="." instance=ExtResource("4_yhvs2")]
+
+[node name="Explosion Connecter" parent="." instance=ExtResource("5_1rn25")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2, 1)
+
+[node name="Player" parent="." instance=ExtResource("6_hhffc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.24776, 0)

@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpkpu58w0pfuc"]
+
+[ext_resource type="PackedScene" uid="uid://dmtrfthqripdk" path="res://Meshes/arm.glb" id="1_qhcck"]
+[ext_resource type="Script" path="res://Scripts/arm.gd" id="2_c25mw"]
+
+[node name="arm" instance=ExtResource("1_qhcck")]
+script = ExtResource("2_c25mw")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(5.99539e-09, -0.00576183, -0.483994)
+bones/0/rotation = Quaternion(0, 0, 0.707107, 0.707107)
+bones/1/position = Vector3(-7.11903e-10, 1, 2.71384e-10)
+bones/1/rotation = Quaternion(4.38814e-11, -3.87769e-08, 0.0011312, 0.999999)
+bones/2/position = Vector3(-3.16257e-10, 1.04617, 1.14781e-09)
+bones/2/rotation = Quaternion(-1.35875e-10, -4.256e-08, -0.00113122, 0.999999)
+bones/2/scale = Vector3(1, 1, 1)
+bones/3/position = Vector3(0.0763111, 1.29819, -4.39682e-08)
+bones/3/rotation = Quaternion(-1.11407e-10, -2.09251e-08, -0.0011312, 0.999999)
+bones/3/scale = Vector3(1, 1, 1)
+bones/4/position = Vector3(-1.97389e-09, 0.125205, -1.84317e-08)
+bones/4/rotation = Quaternion(6.43268e-15, -1.18129e-08, -5.97311e-09, 1)
+bones/5/position = Vector3(0.000570579, 1.29836, 7.51811e-10)
+bones/5/rotation = Quaternion(-1.11399e-10, -2.09251e-08, -0.0011312, 0.999999)
+bones/5/scale = Vector3(1, 1, 1)
+bones/6/position = Vector3(3.33234e-10, 0.125205, 1.60909e-09)
+bones/6/rotation = Quaternion(-3.1587e-15, -2.18954e-08, -2.21092e-08, 1)
+bones/7/position = Vector3(-0.0751645, 1.3009, 1.56691e-08)
+bones/7/rotation = Quaternion(-1.11399e-10, -2.09251e-08, -0.00113117, 0.999999)
+bones/7/scale = Vector3(1, 1, 1)
+bones/8/position = Vector3(-1.16968e-09, 0.125205, 2.15574e-08)
+bones/8/rotation = Quaternion(-2.46257e-15, -1.32157e-08, -3.6829e-08, 1)
+bones/9/position = Vector3(0.104128, 1.19085, -3.56898e-08)
+bones/9/rotation = Quaternion(-1.38562e-07, -8.34722e-08, -0.707906, 0.706306)
+bones/9/scale = Vector3(1, 1, 1)
+bones/10/position = Vector3(1.74956e-07, 0.0732243, 2.91653e-09)
+bones/10/rotation = Quaternion(5.11625e-16, -2.84217e-14, 1.62981e-09, 1)
+
+[node name="Cube" parent="Armature/Skeleton3D" index="0"]
+layers = 2
+
+[node name="AnimationPlayer" parent="." index="1"]
+playback_default_blend_time = 4096.0

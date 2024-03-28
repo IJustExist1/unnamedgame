@@ -1,0 +1,18 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkc6w31ps4emp"]
+
+[ext_resource type="PackedScene" uid="uid://xyyxeuirnlmk" path="res://Assets/Meshes/v1.glb" id="1_uu0og"]
+[ext_resource type="Texture2D" uid="uid://dw3qjkeb08pq8" path="res://Assets/Meshes/v2colour_tex.png" id="2_xxvr0"]
+[ext_resource type="Texture2D" uid="uid://cprsdrqa5e1nk" path="res://Assets/Meshes/v2_wingcolour_tex.png" id="3_a26dn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ewyqf"]
+albedo_texture = ExtResource("2_xxvr0")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7nilm"]
+albedo_texture = ExtResource("3_a26dn")
+
+[node name="vmachine" instance=ExtResource("1_uu0og")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="v1_mdl" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ewyqf")
+surface_material_override/1 = SubResource("StandardMaterial3D_7nilm")

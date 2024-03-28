@@ -1,0 +1,563 @@
+[gd_scene load_steps=40 format=3 uid="uid://clqhkc31k8smd"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/player.gd" id="1_mkj01"]
+[ext_resource type="Texture2D" uid="uid://bufhxmqjax7sd" path="res://Assets/Sprites/slide_meter_outline.png" id="3_0bn7u"]
+[ext_resource type="Texture2D" uid="uid://n8lpl7tdfl8l" path="res://Assets/Sprites/death.png" id="3_26hlu"]
+[ext_resource type="Texture2D" uid="uid://cduxukadsycyn" path="res://Assets/Sprites/end.png" id="3_un0il"]
+[ext_resource type="AudioStream" uid="uid://bdi2tbfe2t5lp" path="res://Assets/SFX/footstep.mp3" id="3_wnxqg"]
+[ext_resource type="Texture2D" uid="uid://cg5o3geckfdpd" path="res://Assets/Sprites/slide_meter_fill.png" id="4_17yl3"]
+[ext_resource type="FontFile" uid="uid://dpm7n0gcth4fv" path="res://Assets/Fonts/VCR_MONO.ttf" id="4_vj2nj"]
+[ext_resource type="PackedScene" uid="uid://bbp1lvkk4jotv" path="res://Assets/Objects/arm.tscn" id="5_pyi87"]
+[ext_resource type="AudioStream" uid="uid://bawoo7flalnsf" path="res://Assets/SFX/flash.mp3" id="6_uu64l"]
+[ext_resource type="Shader" path="res://Assets/psx_camera/psx_camera_shader.gdshader" id="8_6yamq"]
+[ext_resource type="AudioStream" uid="uid://ynf1xedxx14c" path="res://Assets/SFX/ability_recharge.mp3" id="9_bjxmo"]
+[ext_resource type="PackedScene" uid="uid://cnkf5ndqg3fqp" path="res://Assets/Meshes/pistol.glb" id="9_hjonw"]
+[ext_resource type="Script" path="res://Assets/Scripts/pistol.gd" id="10_mvaem"]
+[ext_resource type="AudioStream" uid="uid://cgbw6ais4lyf5" path="res://Assets/SFX/gunshot.mp3" id="11_vhdpv"]
+[ext_resource type="PackedScene" uid="uid://bkc6w31ps4emp" path="res://Assets/Objects/vmachine.tscn" id="12_tmckq"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_v4d87"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7f2bg"]
+texture = ExtResource("3_0bn7u")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6c772"]
+texture = ExtResource("4_17yl3")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nyumm"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uqs46"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_lq7te"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_pll07"]
+resource_name = "text_appear"
+length = 0.5
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextureRect:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8343s"]
+_data = {
+"RESET": SubResource("Animation_lq7te"),
+"text_appear": SubResource("Animation_pll07")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kttad"]
+radius = 0.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytxcb"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lk124"]
+emission_shape_scale = Vector3(3.5, 3.5, 0.1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 1000)
+turbulence_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rh0cb"]
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_aur0v"]
+material = SubResource("StandardMaterial3D_rh0cb")
+size = Vector3(0.01, 0.01, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_in8wl"]
+render_priority = 0
+shader = ExtResource("8_6yamq")
+shader_parameter/enable_fog = false
+shader_parameter/fog_color = Color(0.247059, 0.247059, 0.247059, 1)
+shader_parameter/noise_color = null
+shader_parameter/fog_distance = 100.0
+shader_parameter/fog_fade_range = 225.0
+shader_parameter/enable_noise = false
+shader_parameter/noise_time_fac = 4.0
+shader_parameter/enable_color_limitation = true
+shader_parameter/color_levels = 64
+shader_parameter/enable_dithering = true
+shader_parameter/dither_strength = 0.5
+
+[sub_resource type="QuadMesh" id="QuadMesh_r80xl"]
+material = SubResource("ShaderMaterial_in8wl")
+size = Vector2(2, 2)
+
+[sub_resource type="Animation" id="Animation_jcei6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cam:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kod3a"]
+resource_name = "hard_landing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cam:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.659753, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-6.28319, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(0.366022, 2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.5, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tpvor"]
+resource_name = "jump"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cam:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.277393, 1.86607, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.0523599, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.277393, 1.86607, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fjhvm"]
+resource_name = "landing"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cam:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.277393, 1.86607, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.0523599, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.277393, 1.86607, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fdvck"]
+_data = {
+"RESET": SubResource("Animation_jcei6"),
+"hard_landing": SubResource("Animation_kod3a"),
+"jump": SubResource("Animation_tpvor"),
+"landing": SubResource("Animation_fjhvm")
+}
+
+[sub_resource type="Animation" id="Animation_04x04"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -3.14159, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_p1xgf"]
+resource_name = "shoot"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(9.18955, 0.466517, 1),
+"update": 0,
+"values": [Vector3(-1.86265e-08, -3.14159, 4.29161e-08), Vector3(-1.309, -3.14159, -5.63524e-07), Vector3(1.86264e-08, -3.14159, 4.29161e-08)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4rsjw"]
+_data = {
+"RESET": SubResource("Animation_04x04"),
+"shoot": SubResource("Animation_p1xgf")
+}
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_8rggr"]
+
+[node name="Player" type="CharacterBody3D" groups=["Players"]]
+collision_mask = 30
+wall_min_slide_angle = 0.0
+script = ExtResource("1_mkj01")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_v4d87")
+public_visibility = false
+
+[node name="slide_cooldown" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="countdown" type="Timer" parent="."]
+one_shot = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Interact" type="Panel" parent="CanvasLayer/Control"]
+modulate = Color(1, 1, 1, 0)
+self_modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.334
+anchor_top = 0.512
+anchor_right = 0.701
+anchor_bottom = 0.575
+offset_left = 0.719971
+offset_top = 0.039978
+offset_right = 0.0799561
+offset_bottom = -6.10352e-05
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control/Interact"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(1, 0.682353, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_vj2nj")
+theme_override_font_sizes/normal_font_size = 51
+bbcode_enabled = true
+text = "[center]\"Press 'E' to Interact\""
+
+[node name="Slide" type="Panel" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.828
+anchor_right = 0.101
+anchor_bottom = 1.0
+offset_top = -0.240051
+offset_right = 0.0799866
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_7f2bg")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/Control/Slide"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/fill = SubResource("StyleBoxTexture_6c772")
+step = 1.0
+value = 100.0
+fill_mode = 3
+show_percentage = false
+
+[node name="End" type="Panel" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nyumm")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/End"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_un0il")
+
+[node name="Button" type="Button" parent="CanvasLayer/Control/End"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Death" type="Panel" parent="CanvasLayer/Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_uqs46")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/Death"]
+libraries = {
+"": SubResource("AnimationLibrary_8343s")
+}
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control/Death"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.218
+anchor_right = 0.797
+anchor_bottom = 1.0
+offset_left = 0.439972
+offset_right = -0.240112
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_26hlu")
+
+[node name="standing_collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kttad")
+
+[node name="crouching_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.75, 0)
+shape = SubResource("CapsuleShape3D_ytxcb")
+disabled = true
+
+[node name="Neck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Head" type="Node3D" parent="Neck"]
+
+[node name="Eyes" type="Node3D" parent="Neck/Head"]
+
+[node name="Cam" type="Camera3D" parent="Neck/Head/Eyes"]
+cull_mask = 1048573
+
+[node name="arm" parent="Neck/Head/Eyes/Cam" instance=ExtResource("5_pyi87")]
+transform = Transform3D(-0.05, 0, -4.37114e-09, 0, 0.05, 0, 4.37114e-09, 0, -0.05, -0.297, -0.242, -0.265)
+
+[node name="SlideParticles" type="GPUParticles3D" parent="Neck/Head/Eyes/Cam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00667572, -0.5, -2.16942)
+cast_shadow = 0
+amount = 15
+amount_ratio = 0.0
+lifetime = 0.1
+interp_to_end = 1.0
+visibility_aabb = AABB(-4, -4, -0.558165, 8, 8, 0.663204)
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_lk124")
+draw_pass_1 = SubResource("BoxMesh_aur0v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Neck/Head/Eyes/Cam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.69)
+visible = false
+mesh = SubResource("QuadMesh_r80xl")
+
+[node name="CamAnims" type="AnimationPlayer" parent="Neck/Head/Eyes"]
+libraries = {
+"": SubResource("AnimationLibrary_fdvck")
+}
+
+[node name="pistol" parent="Neck/Head" instance=ExtResource("9_hjonw")]
+transform = Transform3D(-0.05, 0, -1.26759e-07, 0, 0.05, 0, 1.26759e-07, 0, -0.05, 0.38, -0.53, -0.425)
+script = ExtResource("10_mvaem")
+
+[node name="Anims" type="AnimationPlayer" parent="Neck/Head/pistol"]
+libraries = {
+"": SubResource("AnimationLibrary_4rsjw")
+}
+
+[node name="shot" type="AudioStreamPlayer3D" parent="Neck/Head/pistol"]
+stream = ExtResource("11_vhdpv")
+
+[node name="BEAN" type="MeshInstance3D" parent="Neck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
+cast_shadow = 0
+mesh = SubResource("CapsuleMesh_8rggr")
+skeleton = NodePath("../..")
+
+[node name="vmachine" parent="Neck" instance=ExtResource("12_tmckq")]
+transform = Transform3D(-0.5, 0, 7.54979e-08, 0, 0.5, 0, -7.54979e-08, 0, -0.5, 0, -1.5, 0)
+
+[node name="pistol" parent="Neck/vmachine" instance=ExtResource("9_hjonw")]
+transform = Transform3D(0.075, 1.09388e-08, 1.75188e-07, 1.66388e-07, 0.0194114, -0.0724444, -5.59081e-08, 0.0724444, 0.0194114, -0.46049, 1.78076, 0.0772494)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Neck/vmachine"]
+light_color = Color(1, 1, 0.254902, 1)
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_wnxqg")
+
+[node name="Recharge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_bjxmo")
+
+[node name="Flash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_uu64l")
+
+[node name="Voice" type="AudioStreamPlayer" parent="."]
+
+[node name="NoUnCrouchingUnderStuffAnymoreThingyMajig" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+target_position = Vector3(0, 2, 0)
+collision_mask = 2
+
+[connection signal="timeout" from="slide_cooldown" to="." method="_on_slide_cooldown_timeout"]
+[connection signal="timeout" from="countdown" to="." method="_on_countdown_timeout"]
+[connection signal="pressed" from="CanvasLayer/Control/End/Button" to="." method="_on_button_pressed"]

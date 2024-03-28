@@ -1,0 +1,86 @@
+[gd_scene load_steps=7 format=3 uid="uid://dwtwhn2q2arhk"]
+
+[ext_resource type="Environment" uid="uid://b2sdyvtl7fs6w" path="res://Assets/Enviroment/enviroment.tres" id="1_12lvt"]
+[ext_resource type="Script" path="res://Assets/Scripts/World.gd" id="1_404jf"]
+[ext_resource type="Material" uid="uid://5p12kx7g2ayq" path="res://Assets/Materials/FacilityFloor.tres" id="1_rtt3u"]
+[ext_resource type="CameraAttributesPractical" uid="uid://driiblu7ww3ce" path="res://Assets/Enviroment/cam.tres" id="3_xawub"]
+[ext_resource type="Script" path="res://Assets/Scripts/Multiplayer.gd" id="5_pd2bw"]
+[ext_resource type="FontFile" uid="uid://dpm7n0gcth4fv" path="res://Assets/Fonts/VCR_MONO.ttf" id="9_oyj0h"]
+
+[node name="DebugWorld" type="Node3D" groups=["World"]]
+script = ExtResource("1_404jf")
+difficulty = null
+is_exploding = null
+has_doors_blocked = null
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://Assets/Entities/player.tscn")
+spawn_path = NodePath("..")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.447467, 0.223099, 0, 0.446198, 0.894934, -0.5, 0.775036, -0.386419, 0, 0, 0)
+light_energy = 5.0
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_12lvt")
+camera_attributes = ExtResource("3_xawub")
+
+[node name="Map" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map"]
+use_collision = true
+collision_layer = 16
+size = Vector3(50, 1, 50)
+material = ExtResource("1_rtt3u")
+
+[node name="Multiplayer" type="CanvasLayer" parent="."]
+script = ExtResource("5_pd2bw")
+
+[node name="MainMenu" type="PanelContainer" parent="Multiplayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 810.0
+offset_top = 364.0
+offset_right = -810.0
+offset_bottom = -364.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Multiplayer/MainMenu"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Multiplayer/MainMenu/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Title" type="Label" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_oyj0h")
+text = "MULTIPLAYER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Host" type="Button" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_oyj0h")
+text = "HOST"
+
+[node name="Join" type="Button" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_oyj0h")
+text = "JOIN"
+
+[node name="Address" type="LineEdit" parent="Multiplayer/MainMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("9_oyj0h")
+placeholder_text = "ENTER ADDRESS TO JOIN"
+
+[connection signal="pressed" from="Multiplayer/MainMenu/MarginContainer/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Multiplayer/MainMenu/MarginContainer/VBoxContainer/Join" to="." method="_on_join_pressed"]

@@ -1,0 +1,233 @@
+[gd_scene load_steps=14 format=3 uid="uid://clqhkc31k8smd"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/player.gd" id="1_mkj01"]
+[ext_resource type="Shader" path="res://Assets/Shaders/pixelate.gdshader" id="2_tgjag"]
+[ext_resource type="AudioStream" uid="uid://bdi2tbfe2t5lp" path="res://Assets/SFX/footstep.mp3" id="3_wnxqg"]
+[ext_resource type="FontFile" uid="uid://dpm7n0gcth4fv" path="res://Assets/Fonts/VCR_MONO.ttf" id="4_vj2nj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kttad"]
+radius = 0.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ytxcb"]
+radius = 0.4
+height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oeucy"]
+render_priority = 0
+shader = ExtResource("2_tgjag")
+shader_parameter/pixel_size = 6
+
+[sub_resource type="QuadMesh" id="QuadMesh_qx1d8"]
+material = SubResource("ShaderMaterial_oeucy")
+size = Vector2(5, 3)
+
+[sub_resource type="Animation" id="Animation_jcei6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cam:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kod3a"]
+resource_name = "hard_landing"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cam:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.659753, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-6.28319, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(0.366022, 2, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.5, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tpvor"]
+resource_name = "jump"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cam:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.277393, 1.86607, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.0523599, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.277393, 1.86607, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fjhvm"]
+resource_name = "landing"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cam:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.277393, 1.86607, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.0523599, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cam:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(0.277393, 1.86607, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.1, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fdvck"]
+_data = {
+"RESET": SubResource("Animation_jcei6"),
+"hard_landing": SubResource("Animation_kod3a"),
+"jump": SubResource("Animation_tpvor"),
+"landing": SubResource("Animation_fjhvm")
+}
+
+[node name="Player" type="CharacterBody3D"]
+collision_mask = 31
+script = ExtResource("1_mkj01")
+
+[node name="standing_collision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kttad")
+
+[node name="crouching_collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("CapsuleShape3D_ytxcb")
+disabled = true
+
+[node name="Neck" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Head" type="Node3D" parent="Neck"]
+
+[node name="Eyes" type="Node3D" parent="Neck/Head"]
+
+[node name="Cam" type="Camera3D" parent="Neck/Head/Eyes"]
+cull_mask = 1048573
+current = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Neck/Head/Eyes/Cam"]
+visible = false
+light_energy = 10.0
+spot_range = 20.0
+spot_angle = 28.1967
+
+[node name="Pixelation" type="MeshInstance3D" parent="Neck/Head/Eyes/Cam"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.174963)
+mesh = SubResource("QuadMesh_qx1d8")
+
+[node name="CamAnims" type="AnimationPlayer" parent="Neck/Head/Eyes"]
+libraries = {
+"": SubResource("AnimationLibrary_fdvck")
+}
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+visible = false
+light_energy = 10.0
+light_cull_mask = 4294967293
+shadow_enabled = true
+omni_range = 10.0
+
+[node name="NoUnCrouchingUnderStuffAnymoreThingyMajig" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+target_position = Vector3(0, 2, 0)
+collision_mask = 2
+
+[node name="Sounds" type="Node3D" parent="."]
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("3_wnxqg")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.396
+anchor_right = 0.595
+anchor_bottom = 0.073
+offset_left = 1.80798
+offset_right = 3.55994
+offset_bottom = -0.304005
+grow_horizontal = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Panel"]
+texture_filter = 3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0.886275, 0.886275, 0.886275, 1)
+theme_override_colors/font_shadow_color = Color(0.592157, 0.592157, 0.592157, 1)
+theme_override_constants/shadow_offset_x = 10
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/normal_font = ExtResource("4_vj2nj")
+text = "Time"
+fit_content = true
+autowrap_mode = 0
+shortcut_keys_enabled = false

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://t20da842wrk7"]
+
+[ext_resource type="PackedScene" uid="uid://80akn6wiogi7" path="res://Assets/Meshes/collapsed_rock.glb" id="1_njb1g"]
+[ext_resource type="Material" uid="uid://do1ddoda17pef" path="res://Assets/Materials/FacilityConcrete.tres" id="2_rrat3"]
+
+[node name="collapsed_rock" instance=ExtResource("1_njb1g")]
+
+[node name="Icosphere_005" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_rrat3")

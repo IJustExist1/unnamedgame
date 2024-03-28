@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cor1naj8xt1iu"]
+
+[ext_resource type="Script" path="res://Assets/Scripts/explosion_connecter.gd" id="1_61ksd"]
+[ext_resource type="AudioStream" uid="uid://u2yud6jtvx2e" path="res://Assets/SFX/boom.mp3" id="2_ih71w"]
+
+[node name="Explosion Connecter" type="Node3D" groups=["ExplosionConnecter"]]
+script = ExtResource("1_61ksd")
+
+[node name="Explosion" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ih71w")
